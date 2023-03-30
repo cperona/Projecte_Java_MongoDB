@@ -3,5 +3,6 @@ public class Main {
         Connection connection = new Connection();
         Connection.getDBInfo(Connection.mgCli);
         Connection.getPelisAny(Connection.mgCli, 1999);
+        Connection.getPelisEntre();
     }
 }

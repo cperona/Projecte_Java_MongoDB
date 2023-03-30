@@ -37,10 +37,25 @@ public class Connection {
     }
 
     public static void getPelisEntre() {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Introdueix primer any: ");
         try {
+            //Capturem les dades:
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+
+            System.out.println("Introdueix primer any: ");
             String anyPrimer = bufferedReader.readLine();
+
+            System.out.println("Introdueix segon any: ");
+            String anySegon = bufferedReader.readLine();
+
+            //Busquem a la base de dades
+            MongoDatabase mgDB = mgCli.getDatabase("moviedb");
+            MongoCollection<Document> colMovies = mgDB.getCollection("movies");
+            FindIterable<Document> docMovie = colMovies.find(Filters.and(Filters.gte("year", anyPrimer), Filters.lte("year", anySegon)));
+
+            //Mostrem el resulat per pantalla
+            for (Document document : docMovie) {
+                System.out.println(document.toString());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
