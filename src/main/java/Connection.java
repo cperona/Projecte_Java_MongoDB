@@ -44,6 +44,5 @@ public class Connection {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }
